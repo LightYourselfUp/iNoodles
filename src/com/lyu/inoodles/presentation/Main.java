@@ -28,6 +28,7 @@ public class Main extends Activity {
         Intent intent = new Intent(); 
         intent.setClass(this, CountdownTimeSelect.class);
         startActivity(intent);
+        //comentario
     }
 
     public void onGetReviewClick(View v) {
