@@ -18,11 +18,46 @@ public class NoodlesData {
 
     private static final String BASE_URL = "http://www.lightyourselfup.com/inoodles/server/";
     
-    public static int getNoodlesIdByBarCode(String barcode)
+    public static int getNoodlesIdByBarcode(String barcode)
     {
-    	int res = 1;
-    	
-    	return res;
+        int res = 0;
+        
+        // acceso http
+        URL url = null;
+        try {
+            url = new URL(BASE_URL + "IN_getNoodlesIdByBarcode.php?barcode=" + barcode);
+        } catch (MalformedURLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+        URLConnection conn = null;
+        try {
+            conn = url.openConnection();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+        BufferedReader rd = null;
+        try {
+            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+        String mString = null;
+        try {
+            mString = rd.readLine();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+                
+        res = Integer.parseInt(mString);
+        
+        return res;
     }
 
 	public static Noodles getNoodlesByNoodlesId(int noodlesId)

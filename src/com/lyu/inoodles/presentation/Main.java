@@ -56,6 +56,7 @@ public class Main extends Activity {
 		  // call view review intent
 	      Intent intentViewReview = new Intent(); 
 	      intentViewReview.setClass(this, ViewReview.class);
+	      intentViewReview.putExtra("NoodlesId", nid);
 	      startActivity(intentViewReview);
 	
 	  } else {

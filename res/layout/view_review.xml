@@ -47,6 +47,18 @@
 	         android:isIndicator="true"
 	         android:numStars="5"
 	         android:stepSize="0.5" />
+
+	     <Button
+	         android:id="@+id/button1"
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:text="@string/timer" />
+
+	     <!--  ListView
+	         android:id="@+id/listView1"
+	         android:layout_width="match_parent"
+	         android:layout_height="wrap_content" >
+	     </ListView-->
                  
     </LinearLayout>
 	         

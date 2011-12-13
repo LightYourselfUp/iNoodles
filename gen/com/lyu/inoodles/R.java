@@ -67,5 +67,6 @@ public final class R {
         public static final int overall=0x7f04000a;
         public static final int spicy=0x7f040009;
         public static final int take_picture=0x7f040007;
+        public static final int timer=0x7f04000c;
     }
 }

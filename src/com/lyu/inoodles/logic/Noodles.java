@@ -9,7 +9,7 @@ public class Noodles {
 	
 	public static int getNoodlesIdByBarCode(String barcode)
 	{
-		return NoodlesData.getNoodlesIdByBarCode(barcode);
+		return NoodlesData.getNoodlesIdByBarcode(barcode);
 	}
 	
 	public static Noodles getNoodlesByNoodlesId(int noodlesId)
@@ -27,8 +27,18 @@ public class Noodles {
         byte[] bb = NoodlesData.getPictureByNoodlesId(id);
         return bb;
     }
-	
-	public void setNoodlesId(int noodlesId)
+
+    public int getNoodlesId()
+    {
+        return mNoodlesId;
+    }
+    
+    public String getNoodlesName()
+    {
+        return mName;
+    }
+    
+    public void setNoodlesId(int noodlesId)
 	{
 		mNoodlesId = noodlesId;
 	}
