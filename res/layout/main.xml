@@ -2,27 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" android:background="#FFF">
+    android:background="#FFF"
+    android:orientation="vertical" >
 
     <Button
         android:id="@+id/button_countdown"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button_countdown" 
-        android:onClick="onChronometerClick"/>
+        android:layout_weight="0.33"
+        android:onClick="onChronometerClick"
+        android:text="@string/button_countdown" />
 
     <Button
         android:id="@+id/button_get_review"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button_get_review" 
-        android:onClick="onGetReviewClick" />
+        android:layout_weight="0.33"
+        android:onClick="onGetReviewClick"
+        android:text="@string/button_get_review" />
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button_add_review" 
-        android:onClick="onAddReviewClick" />
+        android:layout_weight="0.33"
+        android:onClick="onAddReviewClick"
+        android:text="@string/button_add_review" />
 
 </LinearLayout>
