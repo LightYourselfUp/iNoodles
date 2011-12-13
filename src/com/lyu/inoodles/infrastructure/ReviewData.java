@@ -26,7 +26,7 @@ public class ReviewData {
         URL url = null;
         try {
             url = new URL(BASE_URL
-                    + "Review_getReviewByFkNoodles.php?fkNoodles=" + fkNoodles);
+                    + "Review_getReviewsByFkNoodles.php?fkNoodles=" + fkNoodles);
         } catch (MalformedURLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -86,7 +86,7 @@ public class ReviewData {
 
         String attOverall = null;
         try {
-            attSpic = jObject.getString("over");
+            attOverall = jObject.getString("over");
         } catch (JSONException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -98,7 +98,7 @@ public class ReviewData {
 
         JSONArray jArray = null;
         try {
-            jArray = jObject.getJSONArray("comments");
+            jArray = jObject.getJSONArray("comm");
         } catch (JSONException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -115,9 +115,9 @@ public class ReviewData {
         }
 
         res = new Review();
-        res.setFlav(Integer.parseInt(attFlav));
-        res.setSpic(Integer.parseInt(attSpic));
-        res.setOverall(Integer.parseInt(attOverall));
+        res.setFlav(Float.parseFloat(attFlav));
+        res.setSpic(Float.parseFloat(attSpic));
+        res.setOverall(Float.parseFloat(attOverall));
         res.setComments(attComments);
 
         return res;

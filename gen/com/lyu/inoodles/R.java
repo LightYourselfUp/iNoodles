@@ -59,7 +59,7 @@ public final class R {
         public static final int brand=0x7f040006;
         public static final int button_add_review=0x7f040004;
         public static final int button_countdown=0x7f040002;
-        public static final int button_get_review=0x7f040003;
+        public static final int button_get_reviews=0x7f040003;
         public static final int button_send=0x7f040005;
         public static final int comments=0x7f04000b;
         public static final int flavour=0x7f040008;
