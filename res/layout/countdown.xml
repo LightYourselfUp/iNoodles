@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#FFFFFF00"
+    android:background="#FFFFFFFF"
     android:orientation="vertical" >
     
     <TextView
@@ -11,7 +11,7 @@
             android:layout_height="wrap_content"
             android:onClick="onReviewClick"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#2F909F"
+            android:textColor="#000"
             android:textSize="220sp" 
             android:gravity="center"/>
 
