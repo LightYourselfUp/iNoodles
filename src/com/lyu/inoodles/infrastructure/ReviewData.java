@@ -9,18 +9,24 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.lyu.inoodles.logic.Review;
+import com.lyu.inoodles.logic.Reviews;
 
-public class ReviewData {
+public class ReviewData extends GlobalData {
 
-    private static final String BASE_URL = "http://www.lightyourselfup.com/inoodles/server/";
-
-    public static Review getReviewByFkNoodles(int fkNoodles) {
-        Review res = null;
+    public static Reviews getReviewByFkNoodles(int fkNoodles) {
+        Reviews res = null;
 
         // acceso http
         URL url = null;
@@ -114,11 +120,44 @@ public class ReviewData {
             e.printStackTrace();
         }
 
-        res = new Review();
+        res = new Reviews();
         res.setFlav(Float.parseFloat(attFlav));
         res.setSpic(Float.parseFloat(attSpic));
         res.setOverall(Float.parseFloat(attOverall));
         res.setComments(attComments);
+
+        return res;
+    }
+
+    public static int AddReview(float flavour, float spicy, float overall,
+            String comment) {
+        int res = 0;
+
+        // Create a new HttpClient and Post Header
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpPost httppost = new HttpPost(BASE_URL + "Review_AddReview.php");
+
+        try {
+            // Add your data
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+            nameValuePairs.add(new BasicNameValuePair("flavour", Float
+                    .toString(flavour)));
+            nameValuePairs.add(new BasicNameValuePair("spicy", Float
+                    .toString(spicy)));
+            nameValuePairs.add(new BasicNameValuePair("overall", Float
+                    .toString(overall)));
+            nameValuePairs.add(new BasicNameValuePair("comment", comment));
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+            // Execute HTTP Post Request
+            HttpResponse r = httpclient.execute(httppost);
+            res = r.getStatusLine().getStatusCode();
+
+        } catch (ClientProtocolException e) {
+            // TODO Auto-generated catch block
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+        }
 
         return res;
     }

@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:onClick="onTakePictureClick"
         android:text="@string/take_picture" />
-    
-        <ImageView
+
+    <ImageView
         android:id="@+id/photoResultView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
         android:text="@string/flavour" />
 
     <RatingBar
-        android:id="@+id/ratingBar2"
+        android:id="@+id/ratingFlavour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:numStars="5"
@@ -38,7 +38,7 @@
         android:text="@string/spicy" />
 
     <RatingBar
-        android:id="@+id/ratingBar3"
+        android:id="@+id/ratingSpicy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:numStars="5"
@@ -51,7 +51,7 @@
         android:text="@string/overall" />
 
     <RatingBar
-        android:id="@+id/ratingBar1"
+        android:id="@+id/ratingOverall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:numStars="5"
@@ -64,7 +64,7 @@
         android:text="@string/comments" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/editComment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine" />

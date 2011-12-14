@@ -12,13 +12,13 @@ import android.widget.TextView;
 
 import com.lyu.inoodles.R;
 import com.lyu.inoodles.logic.Noodles;
-import com.lyu.inoodles.logic.Review;
+import com.lyu.inoodles.logic.Reviews;
 
 public class ViewReview extends Activity {
 
     private int mId;
     private String mName;
-    private Review mReview;
+    private Reviews mReview;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class ViewReview extends Activity {
         mId = getIntent().getIntExtra("NoodlesId", 0);
         Noodles n = Noodles.getNoodlesByNoodlesId(mId);
         mName = n.getNoodlesName();
-        mReview = Review.getReviewByFkNoodles(mId);
+        mReview = Reviews.getReviewByFkNoodles(mId);
 
         // Setting noodles name
         TextView tv = (TextView) findViewById(R.id.noodlesName);
