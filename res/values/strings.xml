@@ -4,7 +4,7 @@
     <string name="hello">Hello World, Main!</string>
     <string name="app_name">INoodles</string>
     <string name="button_countdown">Noodles Timer</string>
-    <string name="button_get_review">Get Review</string>
+    <string name="button_get_reviews">Get Reviews</string>
     <string name="button_add_review">Add Review</string>
     <string name="button_send">Send</string>
     <string name="brand">Brand</string>

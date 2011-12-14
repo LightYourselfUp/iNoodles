@@ -3,7 +3,9 @@ package com.lyu.inoodles.presentation;
 import java.util.List;
 
 import android.app.Activity;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -38,12 +40,9 @@ public class ViewReview extends Activity {
         tv.setText(mName);
 
         // Setting picture
-        /*
-         * byte[] bb = Noodles.getPictureByNoodlesId(mId);
-         * 
-         * ImageView im = (ImageView) findViewById(R.id.noodlesPicture);
-         * im.setImageBitmap(BitmapFactory.decodeByteArray(bb, 0, bb.length));
-         */
+         byte[] bb = Noodles.getPictureByNoodlesId(mId);
+         ImageView im = (ImageView) findViewById(R.id.noodlesPicture);
+         im.setImageBitmap(BitmapFactory.decodeByteArray(bb, 0, bb.length));
 
         // Setting ratingBars values
         RatingBar ratingBarAroma = (RatingBar) findViewById(R.id.noodlesFlavour);

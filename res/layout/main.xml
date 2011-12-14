@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.33"
         android:onClick="onGetReviewClick"
-        android:text="@string/button_get_review" />
+        android:text="@string/button_get_reviews" />
 
     <Button
         android:id="@+id/button3"

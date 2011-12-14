@@ -159,7 +159,7 @@ public class NoodlesData {
         
         URL url = null;
         try {
-            url = new URL(BASE_URL + "IN_getPictureById.php?id=" + noodlesId);
+            url = new URL(BASE_URL + "IN_getPictureByNoodlesId.php?noodlesId=" + noodlesId);
         } catch (MalformedURLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
