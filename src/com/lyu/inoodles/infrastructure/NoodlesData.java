@@ -14,9 +14,7 @@ import org.json.JSONObject;
 
 import com.lyu.inoodles.logic.Noodles;
 
-public class NoodlesData {
-
-    private static final String BASE_URL = "http://www.lightyourselfup.com/inoodles/server/";
+public class NoodlesData extends GlobalData {
     
     public static int getNoodlesIdByBarcode(String barcode)
     {
