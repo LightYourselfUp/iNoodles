@@ -2,14 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" android:background="#FFF">
+    android:background="#FFF"
+    android:orientation="vertical" >
 
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/take_picture"
-        android:onClick="onTakePictureClick" />
+        android:onClick="onTakePictureClick"
+        android:text="@string/take_picture" />
+    
+        <ImageView
+        android:id="@+id/photoResultView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.51" />
 
     <TextView
         android:id="@+id/textView1"
@@ -20,7 +27,9 @@
     <RatingBar
         android:id="@+id/ratingBar2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="0.5" />
 
     <TextView
         android:id="@+id/textView2"
@@ -31,7 +40,9 @@
     <RatingBar
         android:id="@+id/ratingBar3"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="0.5" />
 
     <TextView
         android:id="@+id/textView3"
@@ -42,7 +53,9 @@
     <RatingBar
         android:id="@+id/ratingBar1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="0.5" />
 
     <TextView
         android:id="@+id/textView4"
@@ -60,7 +73,7 @@
         android:id="@+id/button_send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_send" 
-        android:onClick="onSendClick" />
+        android:onClick="onSendClick"
+        android:text="@string/button_send" />
 
 </LinearLayout>
