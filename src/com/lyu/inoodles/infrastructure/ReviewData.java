@@ -1,6 +1,7 @@
 package com.lyu.inoodles.infrastructure;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
@@ -10,13 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.InputStreamBody;
+import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -129,8 +130,8 @@ public class ReviewData extends GlobalData {
         return res;
     }
 
-    public static int AddReview(float flavour, float spicy, float overall,
-            String comment) {
+    public static int AddReview(byte[] picture, float flavour, float spicy,
+            float overall, String comment) {
         int res = 0;
 
         // Create a new HttpClient and Post Header
@@ -139,16 +140,29 @@ public class ReviewData extends GlobalData {
 
         try {
             // Add your data
-            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-            nameValuePairs.add(new BasicNameValuePair("flavour", Float
-                    .toString(flavour)));
-            nameValuePairs.add(new BasicNameValuePair("spicy", Float
-                    .toString(spicy)));
-            nameValuePairs.add(new BasicNameValuePair("overall", Float
-                    .toString(overall)));
-            nameValuePairs.add(new BasicNameValuePair("comment", comment));
-            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
+            /*
+             * picture
+             * flavour
+             * spicy
+             * overall
+             */
+ 
+            InputStreamBody isb = new InputStreamBody(new ByteArrayInputStream(picture), "picture");
+            StringBody sbFlavour = new StringBody(Float.toString(flavour));
+            StringBody sbSpicy = new StringBody(Float.toString(spicy));
+            StringBody sbOverall = new StringBody(Float.toString(overall));
+            StringBody sbComment = new StringBody(comment);
+
+            MultipartEntity multipartContent = new MultipartEntity();
+            multipartContent.addPart("picture", isb);
+            multipartContent.addPart("flavour", sbFlavour);
+            multipartContent.addPart("spicy", sbSpicy);
+            multipartContent.addPart("overall", sbOverall);
+            multipartContent.addPart("comment", sbComment);
+
+            httppost.setEntity(multipartContent);
+            
             // Execute HTTP Post Request
             HttpResponse r = httpclient.execute(httppost);
             res = r.getStatusLine().getStatusCode();

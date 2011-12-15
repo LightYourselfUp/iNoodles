@@ -1,5 +1,7 @@
 package com.lyu.inoodles.presentation;
 
+import java.io.ByteArrayOutputStream;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -37,15 +39,33 @@ public class AddReview extends Activity {
     }
 
     public void onSendClick(View v) {
+        /*
+         * image
+         * flavour
+         * spicy
+         * overall
+         * comment
+         */
+        
+        ImageView image = (ImageView) findViewById(R.id.photoResultView);
+        image.buildDrawingCache();
+        Bitmap bmap = image.getDrawingCache();
+        ByteArrayOutputStream bao = new ByteArrayOutputStream();
+        bmap.compress(Bitmap.CompressFormat.JPEG, 90, bao);
+        byte[] ba = bao.toByteArray();
+        
         float flavour = ((RatingBar) findViewById(R.id.ratingFlavour))
                 .getRating();
+        
         float spicy = ((RatingBar) findViewById(R.id.ratingSpicy))
                 .getRating();
+        
         float overall = ((RatingBar) findViewById(R.id.ratingOverall))
                 .getRating();
+        
         String comment = ((EditText) findViewById(R.id.editComment)).getText().toString();
         
-        Review.AddReview(flavour, spicy, overall, comment);
+        Review.AddReview(ba, flavour, spicy, overall, comment);
         
         // Toast.makeText(this, String.valueOf(r), 2000).show();
 

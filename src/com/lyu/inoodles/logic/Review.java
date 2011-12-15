@@ -12,9 +12,9 @@ public class Review {
     float mOverall;
     String mComment;
 
-    public static int AddReview(float flavour, float spicy, float overall, String comment)
-    {
-        return ReviewData.AddReview(flavour, spicy, overall, comment);
+    public static int AddReview(byte[] picture, float flavour, float spicy,
+            float overall, String comment) {
+        return ReviewData.AddReview(picture, flavour, spicy, overall, comment);
     }
-    
+
 }
