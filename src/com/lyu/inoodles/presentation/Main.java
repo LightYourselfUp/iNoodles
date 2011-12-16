@@ -10,6 +10,9 @@ import com.lyu.inoodles.R;
 import com.lyu.inoodles.logic.Noodles;
 
 public class Main extends Activity {
+    
+    private boolean DEBUG = true;
+    
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,8 +35,15 @@ public class Main extends Activity {
     }
 
     public void onGetReviewClick(View v) {
-    	IntentIntegrator integrator = new IntentIntegrator(this);
-    	integrator.initiateScan();
+        if (DEBUG) {
+            Intent intentViewReview = new Intent(); 
+            intentViewReview.setClass(this, ViewReview.class);
+            intentViewReview.putExtra("NoodlesId", 4);
+            startActivity(intentViewReview);            
+        } else {
+            IntentIntegrator integrator = new IntentIntegrator(this);
+            integrator.initiateScan();            
+        }
     }
     
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {

@@ -16,7 +16,8 @@
         android:id="@+id/photoResultView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.51" />
+        android:layout_weight="0.51"
+        android:src="@drawable/superman" />
 
     <TextView
         android:id="@+id/textView1"

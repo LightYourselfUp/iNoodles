@@ -1,7 +1,6 @@
 package com.lyu.inoodles.infrastructure;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
@@ -14,13 +13,16 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.entity.mime.content.InputStreamBody;
+import org.apache.http.entity.mime.content.ByteArrayBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.util.Base64;
 
 import com.lyu.inoodles.logic.Reviews;
 
@@ -142,30 +144,41 @@ public class ReviewData extends GlobalData {
             // Add your data
 
             /*
-             * picture
-             * flavour
-             * spicy
-             * overall
+             * picture flavour spicy overall comment
              */
- 
-            InputStreamBody isb = new InputStreamBody(new ByteArrayInputStream(picture), "picture");
+
+            ByteArrayBody bab = new ByteArrayBody(Base64.encode(picture,
+                    Base64.DEFAULT), "nombre_chingon"); // the name is not used by the server
             StringBody sbFlavour = new StringBody(Float.toString(flavour));
             StringBody sbSpicy = new StringBody(Float.toString(spicy));
             StringBody sbOverall = new StringBody(Float.toString(overall));
             StringBody sbComment = new StringBody(comment);
 
-            MultipartEntity multipartContent = new MultipartEntity();
-            multipartContent.addPart("picture", isb);
+            MultipartEntity multipartContent = new MultipartEntity(
+                    HttpMultipartMode.BROWSER_COMPATIBLE);
+            multipartContent.addPart("picture", bab);
             multipartContent.addPart("flavour", sbFlavour);
             multipartContent.addPart("spicy", sbSpicy);
             multipartContent.addPart("overall", sbOverall);
             multipartContent.addPart("comment", sbComment);
 
             httppost.setEntity(multipartContent);
-            
+
             // Execute HTTP Post Request
             HttpResponse r = httpclient.execute(httppost);
+
             res = r.getStatusLine().getStatusCode();
+
+            /*
+             * BufferedReader reader = new BufferedReader(new
+             * InputStreamReader(r .getEntity().getContent(), "UTF-8")); String
+             * sResponse; StringBuilder s = new StringBuilder();
+             * 
+             * while ((sResponse = reader.readLine()) != null) { s =
+             * s.append(sResponse); } System.out
+             * .println("Response:—————————————————————————————————————————-> "
+             * + s);
+             */
 
         } catch (ClientProtocolException e) {
             // TODO Auto-generated catch block
@@ -175,5 +188,4 @@ public class ReviewData extends GlobalData {
 
         return res;
     }
-
 }

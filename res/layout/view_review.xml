@@ -23,6 +23,12 @@
 	         android:layout_width="wrap_content"
 	         android:layout_height="wrap_content"
 	         android:src="@drawable/ic_launcher" />
+
+	     <TextView
+	         android:id="@+id/textView1"
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:text="@string/flavour" />
 	
 	     <RatingBar
 	         android:id="@+id/noodlesFlavour"
@@ -31,6 +37,12 @@
 	         android:isIndicator="true"
 	         android:numStars="5"
 	         android:stepSize="0.5" />
+
+	     <TextView
+	         android:id="@+id/textView2"
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:text="@string/spicy" />
 	
 	     <RatingBar
 	         android:id="@+id/noodlesSpicy"
@@ -39,6 +51,12 @@
 	         android:isIndicator="true"
 	         android:numStars="5"
 	         android:stepSize="0.5" />
+
+	     <TextView
+	         android:id="@+id/textView3"
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:text="@string/overall" />
 	
 	     <RatingBar
 	         android:id="@+id/noodlesOverall"
