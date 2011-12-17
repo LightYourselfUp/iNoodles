@@ -28,6 +28,7 @@
         </activity>
         <activity android:name=".presentation.ViewReview"></activity>
         <activity android:name=".presentation.AddReview"></activity>
+        <activity android:name=".presentation.AddReviewBarcode"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"/>

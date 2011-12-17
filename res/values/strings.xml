@@ -14,5 +14,6 @@
     <string name="overall">Overall</string>
     <string name="comments">Comments</string>
     <string name="timer">Timer</string>
+    <string name="barcode">Barcode</string>
 
 </resources>

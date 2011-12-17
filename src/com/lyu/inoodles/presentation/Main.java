@@ -11,7 +11,7 @@ import com.lyu.inoodles.logic.Noodles;
 
 public class Main extends Activity {
     
-    private boolean DEBUG = true;
+    private boolean NO_MONEY_FOR_A_SMARTPHONE = false;
     
     /** Called when the activity is first created. */
     @Override
@@ -35,7 +35,7 @@ public class Main extends Activity {
     }
 
     public void onGetReviewClick(View v) {
-        if (DEBUG) {
+        if (NO_MONEY_FOR_A_SMARTPHONE) {
             Intent intentViewReview = new Intent(); 
             intentViewReview.setClass(this, ViewReview.class);
             intentViewReview.putExtra("NoodlesId", 4);
@@ -80,7 +80,7 @@ public class Main extends Activity {
 
     public void onAddReviewClick(View v) {
         Intent intent = new Intent(); 
-        intent.setClass(this, AddReview.class);
+        intent.setClass(this, AddReviewBarcode.class);
         startActivity(intent);    	
     }
 }

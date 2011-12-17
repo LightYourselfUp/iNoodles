@@ -132,8 +132,8 @@ public class ReviewData extends GlobalData {
         return res;
     }
 
-    public static int AddReview(byte[] picture, float flavour, float spicy,
-            float overall, String comment) {
+    public static int AddReview(String barcode, byte[] picture, float flavour,
+            float spicy, float overall, String comment) {
         int res = 0;
 
         // Create a new HttpClient and Post Header
@@ -147,8 +147,10 @@ public class ReviewData extends GlobalData {
              * picture flavour spicy overall comment
              */
 
-            ByteArrayBody bab = new ByteArrayBody(Base64.encode(picture,
-                    Base64.DEFAULT), "nombre_chingon"); // the name is not used by the server
+            StringBody sbBarcode = new StringBody(barcode);
+            ByteArrayBody babPicture = new ByteArrayBody(Base64.encode(picture,
+                    Base64.DEFAULT), "nombre_chingon"); // the name is not used
+                                                        // by the server
             StringBody sbFlavour = new StringBody(Float.toString(flavour));
             StringBody sbSpicy = new StringBody(Float.toString(spicy));
             StringBody sbOverall = new StringBody(Float.toString(overall));
@@ -156,7 +158,8 @@ public class ReviewData extends GlobalData {
 
             MultipartEntity multipartContent = new MultipartEntity(
                     HttpMultipartMode.BROWSER_COMPATIBLE);
-            multipartContent.addPart("picture", bab);
+            multipartContent.addPart("barcode", sbBarcode);
+            multipartContent.addPart("picture", babPicture);
             multipartContent.addPart("flavour", sbFlavour);
             multipartContent.addPart("spicy", sbSpicy);
             multipartContent.addPart("overall", sbOverall);

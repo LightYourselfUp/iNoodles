@@ -10,17 +10,23 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.lyu.inoodles.R;
 import com.lyu.inoodles.logic.Review;
 
 public class AddReview extends Activity {
+    
     private static final int CAMERA_PIC_REQUEST = 1337;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_review);
+        
+        String barcode = getIntent().getStringExtra("NoodlesBarcode");
+        TextView tb = (TextView) findViewById(R.id.textBarcode);
+        tb.setText(barcode);
     }
 
     public void onTakePictureClick(View v) {
@@ -47,12 +53,15 @@ public class AddReview extends Activity {
          * comment
          */
         
+        TextView tBarcode = (TextView) findViewById(R.id.textBarcode);
+        String barcode = tBarcode.getText().toString();
+        
         ImageView image = (ImageView) findViewById(R.id.photoResultView);
         image.buildDrawingCache();
         Bitmap bmap = image.getDrawingCache();
         ByteArrayOutputStream bao = new ByteArrayOutputStream();
         bmap.compress(Bitmap.CompressFormat.JPEG, 90, bao);
-        byte[] ba = bao.toByteArray();
+        byte[] picture = bao.toByteArray();
         
         float flavour = ((RatingBar) findViewById(R.id.ratingFlavour))
                 .getRating();
@@ -65,11 +74,14 @@ public class AddReview extends Activity {
         
         String comment = ((EditText) findViewById(R.id.editComment)).getText().toString();
         
-        Review.AddReview(ba, flavour, spicy, overall, comment);
+        Review.AddReview(barcode, picture, flavour, spicy, overall, comment);
         
         // Toast.makeText(this, String.valueOf(r), 2000).show();
 
-        finish();
+        Intent intentViewReview = new Intent(); 
+        intentViewReview.setClass(this, Main.class);
+        startActivity(intentViewReview);
+
     }
 
 }
