@@ -46,7 +46,8 @@ public class AddReview extends Activity {
 
     public void onSendClick(View v) {
         /*
-         * image
+         * barcode
+         * picture
          * flavour
          * spicy
          * overall
