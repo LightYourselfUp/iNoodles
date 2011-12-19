@@ -138,7 +138,7 @@ public class ReviewData extends GlobalData {
 
         // Create a new HttpClient and Post Header
         HttpClient httpclient = new DefaultHttpClient();
-        HttpPost httppost = new HttpPost(BASE_URL + "Review_AddReview.php");
+        HttpPost httppost = new HttpPost(BASE_URL + "AddReview.php");
 
         try {
             // Add your data
