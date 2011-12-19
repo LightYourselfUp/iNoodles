@@ -11,7 +11,7 @@ import com.lyu.inoodles.logic.Noodles;
 
 public class Main extends Activity {
     
-    private boolean NO_MONEY_FOR_A_SMARTPHONE = false;
+    private boolean NO_MONEY_FOR_A_SMARTPHONE = true;
     
     /** Called when the activity is first created. */
     @Override
