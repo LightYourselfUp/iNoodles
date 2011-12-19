@@ -2,7 +2,6 @@ package com.lyu.inoodles.presentation;
 
 import java.util.List;
 
-import android.app.Activity;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -14,7 +13,7 @@ import com.lyu.inoodles.R;
 import com.lyu.inoodles.logic.Noodles;
 import com.lyu.inoodles.logic.Reviews;
 
-public class ViewReview extends Activity {
+public class ViewReview extends GlobalActivity {
 
     private int mId;
     private String mName;

@@ -1,6 +1,5 @@
 package com.lyu.inoodles.presentation;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,9 +8,7 @@ import android.widget.Toast;
 import com.lyu.inoodles.R;
 import com.lyu.inoodles.logic.Noodles;
 
-public class Main extends Activity {
-    
-    private boolean NO_MONEY_FOR_A_SMARTPHONE = true;
+public class Main extends GlobalActivity {
     
     /** Called when the activity is first created. */
     @Override
