@@ -12,7 +12,7 @@ public class Review {
     float mOverall;
     String mComment;
 
-    public static int AddReview(String barcode, byte[] picture, float flavour,
+    public static String AddReview(String barcode, byte[] picture, float flavour,
             float spicy, float overall, String comment) {
         return ReviewData.AddReview(barcode, picture, flavour, spicy, overall,
                 comment);

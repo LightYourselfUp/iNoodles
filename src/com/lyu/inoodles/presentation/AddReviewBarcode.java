@@ -10,8 +10,17 @@ public class AddReviewBarcode extends GlobalActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        IntentIntegrator integrator = new IntentIntegrator(this);
-        integrator.initiateScan();
+        if (NO_MONEY_FOR_A_SMARTPHONE) {
+            Intent intentViewReview = new Intent();
+            intentViewReview.setClass(this, AddReview.class);
+            intentViewReview.putExtra("NoodlesBarcode", "123456789012");
+            startActivity(intentViewReview);
+        } else {
+            NoodlesToast("Setting up the barcode scanner. Wait a few seconds.");
+            IntentIntegrator integrator = new IntentIntegrator(this);
+            integrator.initiateScan();
+
+        }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {

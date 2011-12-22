@@ -51,12 +51,12 @@
             android:text="4&apos;" />
 
         <Button
-            android:id="@+id/button5m"
+            android:id="@+id/button3m"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_weight="0.33"
-            android:onClick="on5mClick"
-            android:text="5&apos;" />
+            android:onClick="on3mClick"
+            android:text="3&apos;" />
 
         <Button
             android:id="@+id/button2m"

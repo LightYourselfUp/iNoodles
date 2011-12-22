@@ -132,9 +132,9 @@ public class ReviewData extends GlobalData {
         return res;
     }
 
-    public static int AddReview(String barcode, byte[] picture, float flavour,
-            float spicy, float overall, String comment) {
-        int res = 0;
+    public static String AddReview(String barcode, byte[] picture,
+            float flavour, float spicy, float overall, String comment) {
+        String res = "";
 
         // Create a new HttpClient and Post Header
         HttpClient httpclient = new DefaultHttpClient();
@@ -144,25 +144,31 @@ public class ReviewData extends GlobalData {
             // Add your data
 
             /*
-             * picture flavour spicy overall comment
+             * barcode picture flavour spicy overall comment
              */
-
-            StringBody sbBarcode = new StringBody(barcode);
-            ByteArrayBody babPicture = new ByteArrayBody(Base64.encode(picture,
-                    Base64.DEFAULT), "nombre_chingon"); // the name is not used
-                                                        // by the server
-            StringBody sbFlavour = new StringBody(Float.toString(flavour));
-            StringBody sbSpicy = new StringBody(Float.toString(spicy));
-            StringBody sbOverall = new StringBody(Float.toString(overall));
-            StringBody sbComment = new StringBody(comment);
 
             MultipartEntity multipartContent = new MultipartEntity(
                     HttpMultipartMode.BROWSER_COMPATIBLE);
+
+            StringBody sbBarcode = new StringBody(barcode);
             multipartContent.addPart("barcode", sbBarcode);
-            multipartContent.addPart("picture", babPicture);
+
+            if (picture != null) {
+                ByteArrayBody babPicture = new ByteArrayBody(Base64.encode(
+                        picture, Base64.DEFAULT), "nombre_chingon");
+                multipartContent.addPart("picture", babPicture);
+            }
+
+            StringBody sbFlavour = new StringBody(Float.toString(flavour));
             multipartContent.addPart("flavour", sbFlavour);
+
+            StringBody sbSpicy = new StringBody(Float.toString(spicy));
             multipartContent.addPart("spicy", sbSpicy);
+
+            StringBody sbOverall = new StringBody(Float.toString(overall));
             multipartContent.addPart("overall", sbOverall);
+
+            StringBody sbComment = new StringBody(comment);
             multipartContent.addPart("comment", sbComment);
 
             httppost.setEntity(multipartContent);
@@ -170,18 +176,17 @@ public class ReviewData extends GlobalData {
             // Execute HTTP Post Request
             HttpResponse r = httpclient.execute(httppost);
 
-            res = r.getStatusLine().getStatusCode();
+            // res = r.getStatusLine().getStatusCode();
 
-            /*
-             * BufferedReader reader = new BufferedReader(new
-             * InputStreamReader(r .getEntity().getContent(), "UTF-8")); String
-             * sResponse; StringBuilder s = new StringBuilder();
-             * 
-             * while ((sResponse = reader.readLine()) != null) { s =
-             * s.append(sResponse); } System.out
-             * .println("Response:—————————————————————————————————————————-> "
-             * + s);
-             */
+            BufferedReader reader = new BufferedReader(new InputStreamReader(r
+                    .getEntity().getContent(), "UTF-8"));
+            String sResponse;
+            StringBuilder s = new StringBuilder();
+
+            while ((sResponse = reader.readLine()) != null) {
+                s = s.append(sResponse);
+            }
+            res = s.toString();
 
         } catch (ClientProtocolException e) {
             // TODO Auto-generated catch block

@@ -5,6 +5,7 @@ import com.lyu.inoodles.infrastructure.NoodlesData;
 public class Noodles {
 
 	int mNoodlesId;
+	String mBarcode;
 	String mName;
 	
 	public static int getNoodlesIdByBarCode(String barcode)
@@ -33,6 +34,11 @@ public class Noodles {
         return mNoodlesId;
     }
     
+    public String getNoodlesBarcode()
+    {
+        return mBarcode;
+    }
+
     public String getNoodlesName()
     {
         return mName;
@@ -43,7 +49,12 @@ public class Noodles {
 		mNoodlesId = noodlesId;
 	}
 	
-	public void setName(String name)
+    public void setBarcode(String barcode)
+    {
+        mBarcode = barcode;
+    }
+
+    public void setName(String name)
 	{
 		mName = name;
 	}

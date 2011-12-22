@@ -1,7 +1,10 @@
 package com.lyu.inoodles.presentation;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -13,6 +16,36 @@ import android.widget.TextView;
 
 import com.lyu.inoodles.R;
 import com.lyu.inoodles.logic.Review;
+
+class AddReviewTask extends TimerTask {
+
+    private Context mContext;
+    private String mBarcode;
+    private byte[] mPicture;
+    private float mFlavour;
+    private float mSpicy;
+    private float mOverall;
+    private String mComment;
+
+    public AddReviewTask(Context context, String barcode, byte[] picture,
+            float flavour, float spicy, float overall, String comment) {
+        mContext = context;
+        mBarcode = barcode;
+        mPicture = picture;
+        mFlavour = flavour;
+        mSpicy = spicy;
+        mComment = comment;
+    }
+
+    public void run() {
+        Review.AddReview(mBarcode, mPicture, mFlavour, mSpicy, mOverall,
+                mComment);
+
+        Intent intentViewReview = new Intent();
+        intentViewReview.setClass(mContext, Main.class);
+        mContext.startActivity(intentViewReview);
+    }
+}
 
 public class AddReview extends GlobalActivity {
 
@@ -34,10 +67,12 @@ public class AddReview extends GlobalActivity {
         if (NO_MONEY_FOR_A_SMARTPHONE) {
             // TODO: take a picture from drawable and put it into mPicture
             /*
-            Drawable d = ImagesArrayList.get(0);  
-            mPicture = ((BitmapDrawable)d).getBitmap();
-            */
+             * Drawable d = ImagesArrayList.get(0); mPicture =
+             * ((BitmapDrawable)d).getBitmap();
+             */
         } else {
+            NoodlesToast("Setting up the camera. Wait a few seconds.");
+
             Intent cameraIntent = new Intent(
                     android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
@@ -49,6 +84,7 @@ public class AddReview extends GlobalActivity {
             mPicture = (Bitmap) data.getExtras().get("data");
             ImageView image = (ImageView) findViewById(R.id.photoResultView);
             image.setImageBitmap(mPicture);
+            // Toast.makeText(this, "asdf", 2000).show();
         }
     }
 
@@ -60,9 +96,12 @@ public class AddReview extends GlobalActivity {
         TextView tBarcode = (TextView) findViewById(R.id.textBarcode);
         String barcode = tBarcode.getText().toString();
 
-        ByteArrayOutputStream bao = new ByteArrayOutputStream();
-        mPicture.compress(Bitmap.CompressFormat.JPEG, 90, bao);
-        byte[] picture = bao.toByteArray();
+        byte[] picture = null;
+        if (mPicture != null) {
+            ByteArrayOutputStream bao = new ByteArrayOutputStream();
+            mPicture.compress(Bitmap.CompressFormat.JPEG, 90, bao);
+            picture = bao.toByteArray();
+        }
 
         float flavour = ((RatingBar) findViewById(R.id.ratingFlavour))
                 .getRating();
@@ -75,13 +114,16 @@ public class AddReview extends GlobalActivity {
         String comment = ((EditText) findViewById(R.id.editComment)).getText()
                 .toString();
 
-        Review.AddReview(barcode, picture, flavour, spicy, overall, comment);
+        if (picture != null) {
+            NoodlesToast("Uploading the picture. Wait a few seconds.");
+        }
 
-        // Toast.makeText(this, String.valueOf(r), 2000).show();
+        Timer ti = new Timer();
 
-        Intent intentViewReview = new Intent();
-        intentViewReview.setClass(this, Main.class);
-        startActivity(intentViewReview);
+        ti.schedule(new AddReviewTask(this, barcode, picture, flavour, spicy,
+                overall, comment), 100);
+
+        // Review.AddReview(barcode, picture, flavour, spicy, overall, comment);
 
     }
 
