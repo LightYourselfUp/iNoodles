@@ -2,9 +2,7 @@ package com.lyu.inoodles.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.Toast;
 
 import com.lyu.inoodles.R;
 import com.lyu.inoodles.logic.Noodles;
