@@ -35,8 +35,8 @@ public class Main extends GlobalActivity {
             intentViewReview.putExtra("NoodlesId", nid);
             startActivity(intentViewReview);
         } else {
-            IntentIntegrator integrator = new IntentIntegrator(this);
-            integrator.initiateScan();
+            NoodlesToast("Setting up barcode scanner. Please wait.");
+            DelayedBarcodeScanner.Go(this);
         }
     }
 

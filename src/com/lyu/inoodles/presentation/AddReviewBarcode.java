@@ -16,10 +16,9 @@ public class AddReviewBarcode extends GlobalActivity {
             intentViewReview.putExtra("NoodlesBarcode", "123456789012");
             startActivity(intentViewReview);
         } else {
+            // TODO: force orientation to avoid asking for the barcode twice 
             NoodlesToast("Setting up the barcode scanner. Wait a few seconds.");
-            IntentIntegrator integrator = new IntentIntegrator(this);
-            integrator.initiateScan();
-
+            DelayedBarcodeScanner.Go(this);
         }
     }
 
