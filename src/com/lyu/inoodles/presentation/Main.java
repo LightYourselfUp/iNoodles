@@ -42,9 +42,13 @@ public class Main extends GlobalActivity {
             final ProgressDialog pd = ProgressDialog.show(this,
                     "Please wait...", "Setting up the barcode scanner.", true);
 
+            /*
+             * TODO: probar a poner esto en new Thread (como en AddReview) y con
+             * el Barcode Scanner desinstalado (a ver si ofrece instalarlo o peta).
+             */
             IntentIntegrator integrator = new IntentIntegrator(this);
             integrator.initiateScan();
-            
+
             pd.dismiss();
         }
 
