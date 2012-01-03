@@ -1,10 +1,9 @@
 package com.lyu.inoodles.presentation;
 
 import java.io.ByteArrayOutputStream;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import android.content.Context;
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -17,9 +16,10 @@ import android.widget.TextView;
 import com.lyu.inoodles.R;
 import com.lyu.inoodles.logic.Review;
 
-class AddReviewTask extends TimerTask {
+class UploadThread extends GlobalThread {
 
-    private Context mContext;
+    private Activity mActivity;
+    private ProgressDialog mPd;
     private String mBarcode;
     private byte[] mPicture;
     private float mFlavour;
@@ -27,9 +27,10 @@ class AddReviewTask extends TimerTask {
     private float mOverall;
     private String mComment;
 
-    public AddReviewTask(Context context, String barcode, byte[] picture,
+    public UploadThread(Activity activity, ProgressDialog pd, String barcode, byte[] picture,
             float flavour, float spicy, float overall, String comment) {
-        mContext = context;
+        mActivity = activity;
+        mPd = pd;
         mBarcode = barcode;
         mPicture = picture;
         mFlavour = flavour;
@@ -37,14 +38,33 @@ class AddReviewTask extends TimerTask {
         mComment = comment;
     }
 
+    @Override
     public void run() {
-        Review.AddReview(mBarcode, mPicture, mFlavour, mSpicy, mOverall,
-                mComment);
+        
+        /*
+         * 1. upload
+         * 2. close progress dialog
+         * 3. return to main activity
+         */
+
+        if (FAKE_UPLOADS) {
+            try {
+                Thread.sleep(4000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Review.AddReview(mBarcode, mPicture, mFlavour, mSpicy, mOverall,
+                    mComment);            
+        }
+        
+        mPd.dismiss();
 
         Intent intentViewReview = new Intent();
-        intentViewReview.setClass(mContext, Main.class);
-        mContext.startActivity(intentViewReview);
+        intentViewReview.setClass(mActivity, Main.class);
+        mActivity.startActivity(intentViewReview);
     }
+
 }
 
 public class AddReview extends GlobalActivity {
@@ -71,11 +91,15 @@ public class AddReview extends GlobalActivity {
              * ((BitmapDrawable)d).getBitmap();
              */
         } else {
-            NoodlesToast("Setting up the camera. Wait a few seconds.");
+            final ProgressDialog pd = ProgressDialog.show(this,
+                    "Please wait...", "Setting up the camera.", true);
 
             Intent cameraIntent = new Intent(
                     android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
+
+            pd.dismiss();
+
         }
     }
 
@@ -114,16 +138,12 @@ public class AddReview extends GlobalActivity {
         String comment = ((EditText) findViewById(R.id.editComment)).getText()
                 .toString();
 
-        if (picture != null) {
-            NoodlesToast("Uploading the picture. Wait a few seconds.");
-        }
+        final ProgressDialog pd = ProgressDialog.show(this, "Please wait...",
+                "Uploading review.", true);
 
-        Timer ti = new Timer();
-
-        ti.schedule(new AddReviewTask(this, barcode, picture, flavour, spicy,
-                overall, comment), 100);
-
-        // Review.AddReview(barcode, picture, flavour, spicy, overall, comment);
+        UploadThread ut = new UploadThread(this, pd, barcode, picture, flavour,
+                spicy, overall, comment);
+        ut.start();
 
     }
 

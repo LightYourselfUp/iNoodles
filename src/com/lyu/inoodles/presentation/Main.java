@@ -1,5 +1,6 @@
 package com.lyu.inoodles.presentation;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -35,9 +36,18 @@ public class Main extends GlobalActivity {
             intentViewReview.putExtra("NoodlesId", nid);
             startActivity(intentViewReview);
         } else {
-            NoodlesToast("Setting up barcode scanner. Please wait.");
-            DelayedBarcodeScanner.Go(this);
+            // NoodlesToast("Setting up barcode scanner. Please wait.");
+            // DelayedBarcodeScanner.Go(this);
+
+            final ProgressDialog pd = ProgressDialog.show(this,
+                    "Please wait...", "Setting up the barcode scanner.", true);
+
+            IntentIntegrator integrator = new IntentIntegrator(this);
+            integrator.initiateScan();
+            
+            pd.dismiss();
         }
+
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {

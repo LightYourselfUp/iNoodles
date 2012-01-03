@@ -1,5 +1,6 @@
 package com.lyu.inoodles.presentation;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -17,8 +18,14 @@ public class AddReviewBarcode extends GlobalActivity {
             startActivity(intentViewReview);
         } else {
             // TODO: force orientation to avoid asking for the barcode twice 
-            NoodlesToast("Setting up the barcode scanner. Wait a few seconds.");
-            DelayedBarcodeScanner.Go(this);
+            final ProgressDialog pd = ProgressDialog.show(this,
+                    "Please wait...", "Setting up the barcode scanner.", true);
+
+            IntentIntegrator integrator = new IntentIntegrator(this);
+            integrator.initiateScan();
+            
+            pd.dismiss();
+
         }
     }
 
