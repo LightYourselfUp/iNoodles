@@ -44,6 +44,7 @@ public class NoodlesData extends GlobalData {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+            return -1;
         }
 
         String mString = null;
@@ -146,6 +147,15 @@ public class NoodlesData extends GlobalData {
     public static byte[] getPictureByNoodlesId(int noodlesId) {
         byte[] res = null;
 
+        if (FAKE_PICTURE_TRANSFER) {
+            try {
+                Thread.sleep(4000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return res;
+        }
+        
         URL url = null;
         try {
             url = new URL(BASE_URL + "IN_getPictureByNoodlesId.php?noodlesId="

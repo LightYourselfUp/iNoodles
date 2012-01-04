@@ -47,17 +47,8 @@ class UploadThread extends GlobalThread {
          * 3. return to main activity
          */
 
-        if (FAKE_UPLOADS) {
-            try {
-                Thread.sleep(4000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        } else {
-            Review.AddReview(mBarcode, mPicture, mFlavour, mSpicy, mOverall,
-                    mComment);            
-        }
-        
+        Review.AddReview(mBarcode, mPicture, mFlavour, mSpicy, mOverall,
+                mComment);            
         mPd.dismiss();
 
         Intent intentViewReview = new Intent();

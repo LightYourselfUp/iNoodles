@@ -28,7 +28,7 @@ import com.lyu.inoodles.logic.Reviews;
 
 public class ReviewData extends GlobalData {
 
-    public static Reviews getReviewByFkNoodles(int fkNoodles) {
+    public static Reviews getReviewsByFkNoodles(int fkNoodles) {
         Reviews res = null;
 
         // acceso http
@@ -134,66 +134,80 @@ public class ReviewData extends GlobalData {
 
     public static String AddReview(String barcode, byte[] picture,
             float flavour, float spicy, float overall, String comment) {
+        
         String res = "";
 
-        // Create a new HttpClient and Post Header
-        HttpClient httpclient = new DefaultHttpClient();
-        HttpPost httppost = new HttpPost(BASE_URL + "AddReview.php");
+        if (FAKE_PICTURE_TRANSFER) {
+            
+            try {
+                Thread.sleep(4000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return res;
+            
+        } else {
 
-        try {
-            // Add your data
+            try {
+                // Create a new HttpClient and Post Header
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpPost httppost = new HttpPost(BASE_URL + "AddReview.php");
 
-            /*
-             * barcode picture flavour spicy overall comment
-             */
+                // Add your data
 
-            MultipartEntity multipartContent = new MultipartEntity(
-                    HttpMultipartMode.BROWSER_COMPATIBLE);
+                /*
+                 * barcode picture flavour spicy overall comment
+                 */
 
-            StringBody sbBarcode = new StringBody(barcode);
-            multipartContent.addPart("barcode", sbBarcode);
+                MultipartEntity multipartContent = new MultipartEntity(
+                        HttpMultipartMode.BROWSER_COMPATIBLE);
 
-            if (picture != null) {
-                ByteArrayBody babPicture = new ByteArrayBody(Base64.encode(
-                        picture, Base64.DEFAULT), "nombre_chingon");
-                multipartContent.addPart("picture", babPicture);
+                StringBody sbBarcode = new StringBody(barcode);
+                multipartContent.addPart("barcode", sbBarcode);
+
+                if (picture != null) {
+                    ByteArrayBody babPicture = new ByteArrayBody(Base64.encode(
+                            picture, Base64.DEFAULT), "nombre_chingon");
+                    multipartContent.addPart("picture", babPicture);
+                }
+
+                StringBody sbFlavour = new StringBody(Float.toString(flavour));
+                multipartContent.addPart("flavour", sbFlavour);
+
+                StringBody sbSpicy = new StringBody(Float.toString(spicy));
+                multipartContent.addPart("spicy", sbSpicy);
+
+                StringBody sbOverall = new StringBody(Float.toString(overall));
+                multipartContent.addPart("overall", sbOverall);
+
+                StringBody sbComment = new StringBody(comment);
+                multipartContent.addPart("comment", sbComment);
+
+                httppost.setEntity(multipartContent);
+
+                // Execute HTTP Post Request
+                HttpResponse r = httpclient.execute(httppost);
+
+                // res = r.getStatusLine().getStatusCode();
+
+                BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(r.getEntity().getContent(),
+                                "UTF-8"));
+                String sResponse;
+                StringBuilder s = new StringBuilder();
+
+                while ((sResponse = reader.readLine()) != null) {
+                    s = s.append(sResponse);
+                }
+                res = s.toString();
+
+            } catch (ClientProtocolException e) {
+                // TODO Auto-generated catch block
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
             }
 
-            StringBody sbFlavour = new StringBody(Float.toString(flavour));
-            multipartContent.addPart("flavour", sbFlavour);
-
-            StringBody sbSpicy = new StringBody(Float.toString(spicy));
-            multipartContent.addPart("spicy", sbSpicy);
-
-            StringBody sbOverall = new StringBody(Float.toString(overall));
-            multipartContent.addPart("overall", sbOverall);
-
-            StringBody sbComment = new StringBody(comment);
-            multipartContent.addPart("comment", sbComment);
-
-            httppost.setEntity(multipartContent);
-
-            // Execute HTTP Post Request
-            HttpResponse r = httpclient.execute(httppost);
-
-            // res = r.getStatusLine().getStatusCode();
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(r
-                    .getEntity().getContent(), "UTF-8"));
-            String sResponse;
-            StringBuilder s = new StringBuilder();
-
-            while ((sResponse = reader.readLine()) != null) {
-                s = s.append(sResponse);
-            }
-            res = s.toString();
-
-        } catch (ClientProtocolException e) {
-            // TODO Auto-generated catch block
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
+            return res;
         }
-
-        return res;
     }
 }
