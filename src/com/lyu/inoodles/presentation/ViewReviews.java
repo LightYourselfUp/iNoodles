@@ -19,27 +19,24 @@ public class ViewReviews extends GlobalActivity {
 
     private ProgressDialog mPd;
     private int mId;
-    private String mBarcode;
     private Noodles mNoodles;
     private byte[] mPicture;
     private Reviews mReviews;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_reviews);
 
-        // init
         mId = getIntent().getIntExtra("NoodlesId", 0);
-
         mPd = ProgressDialog.show(this, "Please wait...",
                 "Downloading reviews.", true);
-
         new getData().execute();
     }
 
-    private class getData extends AsyncTask<Void, Void, Boolean> {
-
+    private class getData extends AsyncTask<Void, Void, Boolean>
+    {
         @Override
         protected Boolean doInBackground(Void... params) {
             mNoodles = Noodles.getNoodlesByNoodlesId(mId);
@@ -54,18 +51,14 @@ public class ViewReviews extends GlobalActivity {
         }
     }
 
-    public void getDataCallback() {
-
-        /*
-         * TODO: get shit from msg like int anInteger =
-         * msg.getData().getInt("an_int_field");
-         */
-
-        mBarcode = mNoodles.getNoodlesBarcode();
-
-        // Setting noodles name
+    public void getDataCallback()
+    {
+        // barcode, picture, rating, comments
+        
+        // Setting noodles barcode
+        String barcode = mNoodles.getNoodlesBarcode();
         TextView tv = (TextView) findViewById(R.id.noodlesBarcode);
-        tv.setText(mBarcode);
+        tv.setText(barcode);
 
         // Setting picture
         if (mPicture != null) {
