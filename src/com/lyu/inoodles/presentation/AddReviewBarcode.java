@@ -1,11 +1,10 @@
 package com.lyu.inoodles.presentation;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
 public class AddReviewBarcode extends GlobalActivity {
-
+    
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -16,16 +15,9 @@ public class AddReviewBarcode extends GlobalActivity {
             intentViewReview.setClass(this, AddReview.class);
             intentViewReview.putExtra("NoodlesBarcode", "123456789012");
             startActivity(intentViewReview);
-        } else {
-            // TODO: force orientation to avoid asking for the barcode twice 
-            final ProgressDialog pd = ProgressDialog.show(this,
-                    "Please wait...", "Setting up the barcode scanner.", true);
-
+        } else { 
             IntentIntegrator integrator = new IntentIntegrator(this);
             integrator.initiateScan();
-            
-            pd.dismiss();
-
         }
     }
 
