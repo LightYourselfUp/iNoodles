@@ -127,6 +127,7 @@ public class AddReview extends GlobalActivity {
 
         Intent intentViewReview = new Intent();
         intentViewReview.setClass(this, Main.class);
+        intentViewReview.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         this.startActivity(intentViewReview);
     }
 

@@ -101,7 +101,7 @@ public class CountdownTimeSelect extends GlobalActivity {
     public void on10mClick(View v) {
         Intent intent = new Intent();
         intent.setClass(this, Countdown.class);
-        intent.putExtra("time", (int) 600); // 8 minutes
+        intent.putExtra("time", (int) 600); // 10 minutes
         startActivity(intent);
     }
 }
