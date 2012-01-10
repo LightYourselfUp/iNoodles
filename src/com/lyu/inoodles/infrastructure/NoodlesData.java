@@ -93,7 +93,7 @@ public class NoodlesData extends GlobalData {
 
         String mString = null;
         try {
-            mString = rd.readLine(); // esta linea peta si no hay conexión a inet
+            mString = rd.readLine();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
