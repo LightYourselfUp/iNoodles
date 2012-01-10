@@ -46,7 +46,7 @@ public class ViewReviews extends GlobalActivity {
         }
 
         @Override
-        protected void onPostExecute(final Boolean success) {
+        protected void onPostExecute(final Boolean success) {            
             getDataCallback();
         }
     }

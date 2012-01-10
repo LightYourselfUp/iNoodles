@@ -56,6 +56,7 @@ public class ReviewData extends GlobalData {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+            return null;
         }
 
         String mString = null;

@@ -29,23 +29,21 @@ public class Main extends GlobalActivity {
     }
 
     public void onGetReviewClick(View v) {
+        if (!isNetworkAvailable()) {
+            NoodlesToast("No network available.");
+            return;
+        }
+
         if (NO_MONEY_FOR_A_SMARTPHONE) {
             Intent intentViewReview = new Intent();
             intentViewReview.setClass(this, ViewReviews.class);
             int nid = Noodles.getNoodlesIdByBarCode("123456789012");
             intentViewReview.putExtra("NoodlesId", nid);
             startActivity(intentViewReview);
-        } else {
-            // NoodlesToast("Setting up barcode scanner. Please wait.");
-            // DelayedBarcodeScanner.Go(this);
-
+        } else {            
             final ProgressDialog pd = ProgressDialog.show(this,
                     "Please wait...", "Setting up the barcode scanner.", true);
 
-            /*
-             * TODO: probar a poner esto en new Thread (como en AddReview) y con
-             * el Barcode Scanner desinstalado (a ver si ofrece instalarlo o peta).
-             */
             IntentIntegrator integrator = new IntentIntegrator(this);
             integrator.initiateScan();
 
@@ -83,6 +81,12 @@ public class Main extends GlobalActivity {
     }
 
     public void onAddReviewClick(View v) {
+        
+        if (!isNetworkAvailable()) {
+            NoodlesToast("No network available.");
+            return;
+        }
+        
         Intent intent = new Intent();
         intent.setClass(this, AddReviewBarcode.class);
         startActivity(intent);

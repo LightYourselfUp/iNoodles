@@ -80,7 +80,7 @@ public class NoodlesData extends GlobalData {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
+        
         BufferedReader rd = null;
         try {
             rd = new BufferedReader(
@@ -88,11 +88,12 @@ public class NoodlesData extends GlobalData {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+            return null;
         }
 
         String mString = null;
         try {
-            mString = rd.readLine();
+            mString = rd.readLine(); // esta linea peta si no hay conexión a inet
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
