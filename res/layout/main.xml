@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.33"
-        android:onClick="onGetReviewClick"
+        android:onClick="onGetReviewsClick"
         android:text="@string/button_get_reviews" />
 
     <Button

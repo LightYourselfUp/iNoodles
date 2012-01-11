@@ -13,19 +13,21 @@ import android.widget.Toast;
 public class GlobalActivity extends Activity {
 
     protected static boolean NO_MONEY_FOR_A_SMARTPHONE = false;
-    
-    public void NoodlesToast(String t)
-    {
-        Toast toast = Toast.makeText(this,
-                t, Toast.LENGTH_LONG);
+
+    public void NoodlesToast(String t) {
+        Toast toast = Toast.makeText(this, t, Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
         toast.show();
     }
-    
-    protected boolean isNetworkAvailable() {
+
+    protected boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        return cm.getActiveNetworkInfo().isConnectedOrConnecting();
+        NetworkInfo nInfo = cm.getActiveNetworkInfo();
+
+        if (nInfo == null)
+            return false;
+
+        return nInfo.isConnectedOrConnecting();
     }
 
-    
 }
