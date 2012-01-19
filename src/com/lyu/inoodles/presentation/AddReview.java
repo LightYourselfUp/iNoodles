@@ -46,13 +46,13 @@ public class AddReview extends GlobalActivity {
              * ((BitmapDrawable)d).getBitmap();
              */
         } else {
-            mPd = ProgressDialog.show(this,
-                    "Please wait...", "Setting up the camera.", true);
+            mPd = ProgressDialog.show(this, "Please wait...",
+                    "Setting up the camera.", true);
 
-            new takePicture().execute();            
+            new takePicture().execute();
         }
     }
-    
+
     private class takePicture extends AsyncTask<Void, Void, Boolean> {
         @Override
         protected Boolean doInBackground(Void... params) {
@@ -68,20 +68,23 @@ public class AddReview extends GlobalActivity {
         }
     }
 
-    public void takePictureCallback()
-    {
+    public void takePictureCallback() {
         mPd.dismiss();
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_PIC_REQUEST) {
-            Bitmap bmap = (Bitmap) data.getExtras().get("data");
-            ImageView image = (ImageView) findViewById(R.id.photoResultView);
-            image.setImageBitmap(bmap);
+            
+            /* "sometimes" this event is launched with data being null */
+            if (data != null) { 
+                Bitmap bmap = (Bitmap) data.getExtras().get("data");
+                ImageView image = (ImageView) findViewById(R.id.photoResultView);
+                image.setImageBitmap(bmap);
 
-            ByteArrayOutputStream bao = new ByteArrayOutputStream();
-            bmap.compress(Bitmap.CompressFormat.JPEG, 90, bao);
-            mPicture = bao.toByteArray();
+                ByteArrayOutputStream bao = new ByteArrayOutputStream();
+                bmap.compress(Bitmap.CompressFormat.JPEG, 90, bao);
+                mPicture = bao.toByteArray();
+            }
         }
     }
 
