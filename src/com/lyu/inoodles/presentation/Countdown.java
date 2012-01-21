@@ -14,7 +14,7 @@ public class Countdown extends GlobalActivity {
         setContentView(R.layout.countdown);
         Bundle extras = getIntent().getExtras();
         int millisTimer = extras.getInt("time", 180);
-
+        
         new CountDownTimer(millisTimer * 1000, 1000) {
             TextView mTextField = (TextView) findViewById(R.id.mTextField);
 
