@@ -2,29 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#FFF"
-    android:orientation="vertical" >
+    android:background="#def2f4"
+    android:orientation="vertical" android:weightSum="3.0">
 
     <Button
         android:id="@+id/button_countdown"
-        android:layout_width="264dp"
-        android:layout_height="190dp"
-        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/timerbutton"
-        android:onClick="onChronometerClick" />
+        android:onClick="onChronometerClick" android:layout_weight="1.0"/>
 
     <Button
         android:id="@+id/button_get_review"
-        android:layout_width="273dp"
-        android:layout_height="184dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/getreviewsbutton"
-        android:onClick="onGetReviewsClick" android:layout_gravity="center_horizontal"/>
+        android:onClick="onGetReviewsClick" android:layout_weight="1.0"/>
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="217dp"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/addreviewsbutton"
-        android:onClick="onAddReviewClick" android:layout_gravity="center_horizontal"/>
+        android:onClick="onAddReviewClick" android:layout_weight="1.0"/>
 
 </LinearLayout>
