@@ -45,11 +45,10 @@ public final class R {
         public static final int linearLayout2=0x7f05000e;
         public static final int linearLayout3=0x7f050016;
         public static final int mTextField=0x7f05000d;
-        public static final int noodlesBarcode=0x7f05001f;
-        public static final int noodlesFlavour=0x7f050021;
-        public static final int noodlesOverall=0x7f050023;
-        public static final int noodlesPicture=0x7f050020;
-        public static final int noodlesSpicy=0x7f050022;
+        public static final int noodlesFlavour=0x7f050020;
+        public static final int noodlesOverall=0x7f050022;
+        public static final int noodlesPicture=0x7f05001f;
+        public static final int noodlesSpicy=0x7f050021;
         public static final int photoResultView=0x7f050003;
         public static final int ratingFlavour=0x7f050005;
         public static final int ratingOverall=0x7f050009;

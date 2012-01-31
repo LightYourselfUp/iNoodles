@@ -19,7 +19,6 @@ public class ViewReviews extends GlobalActivity {
 
     private ProgressDialog mPd;
     private int mId;
-    private Noodles mNoodles;
     private byte[] mPicture;
     private Reviews mReviews;
 
@@ -39,7 +38,6 @@ public class ViewReviews extends GlobalActivity {
     {
         @Override
         protected Boolean doInBackground(Void... params) {
-            mNoodles = Noodles.getNoodlesByNoodlesId(mId);
             mPicture = Noodles.getPictureByNoodlesId(mId);
             mReviews = Reviews.getReviewsByFkNoodles(mId);
             return true;
@@ -55,11 +53,6 @@ public class ViewReviews extends GlobalActivity {
     {
         // barcode, picture, rating, comments
         
-        // Setting noodles barcode
-        String barcode = mNoodles.getNoodlesBarcode();
-        TextView tv = (TextView) findViewById(R.id.noodlesBarcode);
-        tv.setText(barcode);
-
         // Setting picture
         if (mPicture != null) {
             ImageView im = (ImageView) findViewById(R.id.noodlesPicture);
@@ -82,7 +75,7 @@ public class ViewReviews extends GlobalActivity {
         List<String> comments = mReviews.getComments();
         boolean esPar = false;
         for (int i = 0; i < comments.size(); i++) {
-            tv = new TextView(this);
+        	TextView tv = new TextView(this);
             tv.setText(comments.get(i)); // a more efficient iterator could
                                          // be
                                          // used?
