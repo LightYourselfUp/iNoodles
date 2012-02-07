@@ -24,7 +24,8 @@
             android:layout_height="wrap_content"
             android:isIndicator="true"
             android:numStars="5"
-            android:stepSize="0.5" 
+            android:stepSize="0.5"
+            android:layout_gravity="center"
             style="@style/flavourgato"/>
 
         <RatingBar
@@ -34,6 +35,7 @@
             android:isIndicator="true"
             android:numStars="5"
             android:stepSize="0.5" 
+            android:layout_gravity="center"
             style="@style/spicygato"/>
 
         <RatingBar
@@ -42,7 +44,8 @@
             android:layout_height="wrap_content"
             android:isIndicator="true"
             android:numStars="5"
-            android:stepSize="0.5" 
+            android:stepSize="0.5"
+            android:layout_gravity="center"
             style="@style/overallgato"/>
 
         <!--
