@@ -34,54 +34,29 @@
         android:layout_weight="0.51"
         android:src="@drawable/superman" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/flavour"
-        android:textColor="#000000" />
-
     <RatingBar
         android:id="@+id/ratingFlavour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:numStars="5"
-        android:stepSize="0.5" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/spicy"
-        android:textColor="#000000" />
+        android:stepSize="0.5" 
+        style="@style/flavourgato"/>
 
     <RatingBar
         android:id="@+id/ratingSpicy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:numStars="5"
-        android:stepSize="0.5" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/overall"
-        android:textColor="#000000" />
+        android:stepSize="0.5" 
+        style="@style/spicygato"/>
 
     <RatingBar
         android:id="@+id/ratingOverall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:numStars="5"
-        android:stepSize="0.5" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/comments"
-        android:textColor="#000000" />
+        android:stepSize="0.5" 
+        style="@style/overallgato"/>
 
     <EditText
         android:id="@+id/editComment"
